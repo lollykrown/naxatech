@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { background: #080C18; color: #E2E6F0; }
+  ::selection { background: rgba(200,255,62,0.25); color: #fdc700; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #080C18; }
+  ::-webkit-scrollbar-thumb { background: #2E3650; border-radius: 4px; }
+}
+
+@layer utilities {
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, #fdc700 0%, #7AE0FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .card-border {
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .card-border-acid {
+    border: 1px solid rgba(200,255,62,0.2);
+  }
+  .glow-acid {
+    box-shadow: 0 0 40px rgba(200,255,62,0.15);
+  }
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+  }
+  .clip-diagonal-inv {
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+  }
+}
