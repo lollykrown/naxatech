@@ -42,7 +42,7 @@ const stats = [
 ]
 
 const perks = [
-  'Nigeria-based team with global standards',
+  // 'Nigeria-based team with global standards',
   'ISO-aligned delivery processes',
   'Dedicated project manager on every engagement',
   'Post-launch support & maintenance included',
@@ -54,7 +54,7 @@ export default function About() {
   return (
     <section id="about" className="py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-ink" />
-      <div className="absolute top-0 right-0 w-[400px] h-full pointer-events-none"
+      <div className="absolute top-0 right-0 w-100 h-full pointer-events-none"
         style={{ background: 'linear-gradient(to bottom left, rgba(200,255,62,0.04) 0%, transparent 60%)' }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
@@ -76,10 +76,10 @@ export default function About() {
             </h2>
             <p className="text-slate-body text-[15px] leading-loose mb-5">
               Naxatech is a Nigerian technology company on a mission to make world-class IT services
-              accessible to every business — from startups in Lagos to enterprises across the federation.
+              accessible to every business — from startups to enterprises across the world.
             </p>
             <p className="text-slate-body text-[15px] leading-loose mb-8">
-              We combine deep technical expertise with an intimate understanding of the Nigerian business
+              We combine deep technical expertise with an intimate understanding of business needs and the local
               landscape to deliver solutions that actually work — on time, on budget, and built to last.
             </p>
 
