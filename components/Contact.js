@@ -79,7 +79,7 @@ export default function Contact() {
                 </div>
               </motion.div>
             ))}
-            <div className="pt-4 border-t border-white/[0.06]">
+            <div className="pt-4 border-t border-white/6">
               <p className="text-[11px] font-display font-semibold tracking-widest uppercase text-slate-muted mb-4">Follow Us</p>
               <div className="flex gap-3">
                 {['LI','TW','FB','IG'].map((s, i) => (

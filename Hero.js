@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Play, Zap } from 'lucide-react'
 
 const words = ['Transform', 'Accelerate', 'Innovate', 'Elevate']
@@ -19,21 +19,14 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
 }
 
-const bars = [
-  { name: 'E-Commerce Platform', val: 87, color: '#C8FF3E' },
-  { name: 'Cloud Migration',     val: 64, color: '#7AE0FF' },
-  { name: 'ERP Integration',     val: 42, color: '#FF8A3E' },
-  { name: 'Cybersecurity Audit', val: 95, color: '#C8FF3E' },
-]
-
 export default function Hero() {
   const [wordIdx, setWordIdx] = useState(0)
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
 
-  const bgY    = useTransform(scrollYProgress, [0, 1], ['0%',   '25%'])
-  const textY  = useTransform(scrollYProgress, [0, 1], ['0%',   '40%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  const bgY   = useTransform(scrollYProgress, [0, 1], ['0%', '25%'])
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '40%'])
+  const fade  = useTransform(scrollYProgress, [0, 0.6], [1, 0])
   const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08])
 
   useEffect(() => {
@@ -42,20 +35,20 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id='home' ref={ref} className="relative min-h-screen flex flex-col justify-center overflow-hidden md:pt-17.5">
-      {/* Parallax background layers */}
+    <section ref={ref} className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-[70px]">
+      {/* Parallax BG layers */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 grid-bg opacity-100 pointer-events-none" />
-      <div className="absolute inset-0 bg-linear-to-br from-ink via-ink to-ink-3" />
+      <div className="absolute inset-0 bg-gradient-to-br from-ink via-ink to-ink-3" />
       <motion.div style={{ y: bgY }}
-        className="absolute top-[-10%] right-[-5%] w-150 h-150 rounded-full bg-acid/[0.07] blur-[120px] pointer-events-none" />
+        className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-acid/[0.07] blur-[120px] pointer-events-none" />
       <motion.div style={{ y: bgY }}
-        className="absolute bottom-[-10%] left-[15%] w-125 h-125 rounded-full bg-blue-600/[0.07] blur-[120px] pointer-events-none" />
+        className="absolute bottom-[-10%] left-[15%] w-[500px] h-[500px] rounded-full bg-blue-600/[0.07] blur-[120px] pointer-events-none" />
 
-      <motion.div style={{ y: textY, opacity }}
+      <motion.div style={{ y: textY, opacity: fade }}
         className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-0 w-full">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-          {/* Left — copy */}
+          {/* ── Left: copy ── */}
           <motion.div variants={containerVariants} initial="hidden" animate="visible">
             {/* Badge */}
             <motion.div variants={itemVariants}
@@ -68,10 +61,9 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Headline */}
+            {/* Animated headline */}
             <motion.h1 variants={itemVariants}
-              className="font-display font-extrabold text-[52px] lg:text-[72px] leading-none tracking-tight mb-6">
-              {/* Animated word */}
+              className="font-display font-extrabold text-[52px] lg:text-[72px] leading-[1.0] tracking-tight mb-6">
               <span className="block h-[1.0em] overflow-hidden relative">
                 <AnimatePresence mode="wait">
                   <motion.span key={wordIdx}
@@ -100,8 +92,8 @@ export default function Hero() {
             {/* CTAs */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
               <motion.a href="#services"
-                className="group hover:bg-yellow-300 hover:text-black inline-flex items-center gap-2 px-7 py-3.5 bg-acid text-ink font-display font-bold text-[14px] tracking-wide rounded glow-acid"
-                whileHover={{ scale: 1.04, gap: '12px' }}
+                className="group inline-flex items-center gap-2 px-7 py-3.5 bg-acid text-ink font-display font-bold text-[14px] tracking-wide rounded glow-acid"
+                whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}>
                 Explore Services
                 <motion.span whileHover={{ x: 4 }} transition={{ type: 'spring', stiffness: 400 }}>
@@ -118,23 +110,19 @@ export default function Hero() {
             </motion.div>
 
             {/* Stats */}
-            {/* <motion.div variants={itemVariants}
+            <motion.div variants={itemVariants}
               className="flex gap-8 mt-14 pt-10 border-t border-white/[0.07]">
               {[['150+','Projects Delivered'],['8+','Years Experience'],['98%','Client Satisfaction']].map(([n, l], i) => (
                 <motion.div key={l}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9 + i * 0.1 }}>
-                  <motion.p
-                    className="font-display font-black text-[32px] text-acid leading-none"
-                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 + i * 0.1 }}>
-                    {n}
-                  </motion.p>
+                  <p className="font-display font-black text-[32px] text-acid leading-none">{n}</p>
                   <p className="text-slate-muted text-[12px] mt-1 tracking-wide">{l}</p>
                 </motion.div>
               ))}
-            </motion.div>*/}
-          </motion.div> 
+            </motion.div>
+          </motion.div>
 
           {/* ── Right: image ── */}
           <motion.div
@@ -221,11 +209,12 @@ export default function Hero() {
             {/* Ambient glow behind card */}
             <div className="absolute inset-0 bg-acid/[0.06] rounded-2xl blur-2xl -z-10 scale-110 pointer-events-none" />
           </motion.div>
+
         </div>
       </motion.div>
 
-      {/* Marquee */}
-      <div className="relative z-10 mt-16 lg:mt-24 border-t border-b border-white/6 py-3 overflow-hidden bg-ink-2/50">
+      {/* Marquee strip */}
+      <div className="relative z-10 mt-16 lg:mt-24 border-t border-b border-white/[0.06] py-3 overflow-hidden bg-ink-2/50">
         <motion.div
           className="flex whitespace-nowrap"
           animate={{ x: [0, '-50%'] }}
@@ -233,7 +222,7 @@ export default function Hero() {
           {[0, 1].map(copy => (
             <div key={copy} className="flex shrink-0">
               {services.map(s => (
-                <span key={s}
+                <span key={s + copy}
                   className="inline-flex items-center gap-5 mx-6 text-[12px] font-display font-semibold tracking-[0.18em] uppercase text-slate-muted">
                   <span className="text-acid text-[8px]">◆</span>{s}
                 </span>
