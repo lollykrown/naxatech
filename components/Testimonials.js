@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 
 const testimonials = [
-  { quote: "Naxatech built our entire logistics management platform from scratch in just 6 weeks. The quality, speed, and communication were outstanding. We've grown 3x since launch.", name: 'Emeka Nwosu',      role: 'CTO, SwiftHaul Logistics',   initials: 'EN', service: 'Custom Software', color: '#C8FF3E' },
+  { quote: "Naxatech built our entire logistics management platform from scratch in just 6 weeks. The quality, speed, and communication were outstanding. We've grown 3x since launch.", name: 'Emeka Nwosu',      role: 'CTO, SwiftHaul Logistics',   initials: 'EN', service: 'Custom Software', color: '#fdc700' },
   { quote: "After struggling with security incidents for months, Naxatech overhauled our infrastructure completely. We've had zero breaches in 18 months since.", name: 'Fatima Al-Hassan', role: 'IT Director, First Unity Bank', initials: 'FA', service: 'Cybersecurity',   color: '#7AE0FF' },
   { quote: "Our cloud migration was seamless. Naxatech handled planning, execution, staff training — and our infrastructure costs dropped by 40% in the first quarter.", name: 'Tunde Afolabi',  role: 'COO, NovaMed Healthcare',     initials: 'TA', service: 'Cloud Solutions', color: '#FF8A3E' },
-  { quote: "The team delivered a stunning e-commerce site converting at nearly double our old one. They also trained our staff on managing it. Truly full-service.", name: 'Chioma Eze',      role: 'Founder, StyleHaus Nigeria',   initials: 'CE', service: 'Web Development', color: '#C8FF3E' },
+  { quote: "The team delivered a stunning e-commerce site converting at nearly double our old one. They also trained our staff on managing it. Truly full-service.", name: 'Chioma Eze',      role: 'Founder, StyleHaus Nigeria',   initials: 'CE', service: 'Web Development', color: '#fdc700' },
 ]
 
 const slideVariants = {
@@ -25,7 +25,7 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-ink" />
+      <div className="absolute inset-0 bg-white" />
       <motion.div className="absolute inset-0 pointer-events-none"
         animate={{ background: `radial-gradient(ellipse 50% 50% at 50% 50%, ${t.color}08 0%, transparent 70%)` }}
         transition={{ duration: 0.8 }} />
@@ -39,12 +39,12 @@ export default function Testimonials() {
           transition={{ duration: 0.7 }}>
           <div className="flex items-center justify-center gap-3 mb-4">
             <motion.div className="h-px bg-acid" initial={{ width: 0 }} whileInView={{ width: 40 }} viewport={{ once: true }} transition={{ duration: 0.5 }} />
-            <span className="text-acid text-[11px] font-display font-bold tracking-[0.2em] uppercase">Client Stories</span>
+            <span className="text-amber-700 text-[11px] font-display font-bold tracking-[0.2em] uppercase">Client Stories</span>
             <motion.div className="h-px bg-acid" initial={{ width: 0 }} whileInView={{ width: 40 }} viewport={{ once: true }} transition={{ duration: 0.5 }} />
           </div>
           <h2 className="font-display font-extrabold text-[44px] lg:text-[56px] leading-[1.05] tracking-tight">
-            <span className="text-white">What Our Clients</span><br />
-            <span className="text-gradient">Say About Us</span>
+            <span className="text-slate-900">What Our Clients</span><br />
+            <span className="text-gradient-light">Say About Us</span>
           </h2>
         </motion.div>
 
@@ -57,16 +57,16 @@ export default function Testimonials() {
             transition={{ duration: 0.6 }}>
             {testimonials.map((item, i) => (
               <motion.button key={i} onClick={() => setSlide([i, i > active ? 1 : -1])}
-                className="text-left p-4 rounded-xl border transition-colors"
-                style={{ borderColor: active === i ? `${item.color}35` : 'rgba(255,255,255,0.06)', backgroundColor: active === i ? '#141B2E' : '#0E1322' }}
+                className={`group text-left p-4 rounded-xl border hover:bg-[#29a9e1] transition-colors duration-300 ${active === i ? 'bg-slate-100' : 'bg-white'}`}
+                style={{ borderColor: active === i ? `${item.color}35` : 'rgba(15,23,42,0.1)' }}
                 whileHover={{ x: 4, borderColor: `${item.color}25` }}
                 whileTap={{ scale: 0.98 }}>
-                <motion.p className="text-[12px] font-display font-semibold tracking-wide mb-1"
+                <motion.p className="text-[12px] font-display font-semibold tracking-wide mb-1 group-hover:!text-white"
                   animate={{ color: active === i ? item.color : '#5C657E' }}>
                   {item.service}
                 </motion.p>
-                <p className="text-white text-[13px] font-medium">{item.name}</p>
-                <p className="text-slate-dim text-[11px]">{item.role}</p>
+                <p className="text-slate-900 group-hover:text-white transition-colors text-[13px] font-medium">{item.name}</p>
+                <p className="text-slate-500 group-hover:text-white/90 transition-colors text-[11px]">{item.role}</p>
                 {active === i && (
                   <motion.div className="h-0.5 mt-3 rounded-full" style={{ background: item.color }}
                     layoutId="activeTab"
@@ -89,19 +89,19 @@ export default function Testimonials() {
                   custom={dir}
                   variants={slideVariants}
                   initial="enter" animate="center" exit="exit"
-                  className="bg-ink-3 p-8 lg:p-12">
+                  className="group bg-white hover:bg-[#29a9e1] transition-colors duration-300 p-8 lg:p-12">
                   <Quote size={80} className="absolute top-6 right-8 opacity-[0.04]" style={{ color: t.color }} />
 
                   <div className="flex gap-0.5 mb-8">
                     {Array(5).fill(null).map((_, i) => (
-                      <motion.span key={i} className="text-[18px]" style={{ color: t.color }}
+                      <motion.span key={i} className="text-[18px] group-hover:!text-white" style={{ color: t.color }}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.06 }}>★</motion.span>
                     ))}
                   </div>
 
-                  <blockquote className="text-white text-[18px] lg:text-[22px] leading-relaxed font-light mb-10">
+                  <blockquote className="text-slate-900 group-hover:text-white transition-colors text-[18px] lg:text-[22px] leading-relaxed font-light mb-10">
                     "{t.quote}"
                   </blockquote>
 
@@ -114,15 +114,15 @@ export default function Testimonials() {
                         {t.initials}
                       </motion.div>
                       <div>
-                        <p className="text-white font-display font-semibold text-[15px]">{t.name}</p>
-                        <p className="text-slate-muted text-[12px]">{t.role}</p>
+                        <p className="text-slate-900 group-hover:text-white transition-colors font-display font-semibold text-[15px]">{t.name}</p>
+                        <p className="text-slate-500 group-hover:text-white/90 transition-colors text-[12px]">{t.role}</p>
                       </div>
                     </div>
 
                     <div className="flex gap-2">
                       {[['prev', -1, ChevronLeft], ['next', 1, ChevronRight]].map(([id, d, Icon]) => (
                         <motion.button key={id} onClick={() => go(d)}
-                          className="w-10 h-10 rounded-lg card-border flex items-center justify-center text-slate-muted"
+                          className="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500"
                           whileHover={{ borderColor: `${t.color}50`, color: t.color, scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}>
                           <Icon size={18} />

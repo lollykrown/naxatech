@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['var(--font-syne)', 'sans-serif'],
-        body: ['var(--font-outfit)', 'sans-serif'],
+        display: ['var(--font-display)', 'sans-serif'],
+        body: ['var(--font-body)', 'sans-serif'],
       },
       colors: {
         ink: {
@@ -20,12 +20,12 @@ module.exports = {
         },
         acid: {
           DEFAULT: '#fdc700',
-          dim: '#8CB52A',
-          muted: 'rgba(200,255,62,0.10)',
+          dim: '#B38B00',
+          muted: 'rgba(253,199,0,0.10)',
         },
         slate: {
           body: '#A8B0CC',
-          muted: '#5C657E',
+          muted: '#8A93AD',
           dim: '#2E3650',
         },
       },
@@ -35,6 +35,7 @@ module.exports = {
         'marquee': 'marquee 30s linear infinite',
         'float': 'float 6s ease-in-out infinite',
         'pulse-slow': 'pulse 4s ease-in-out infinite',
+        'spin-slow': 'spin 8s linear infinite',
       },
       keyframes: {
         fadeUp: {

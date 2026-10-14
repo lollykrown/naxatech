@@ -7,12 +7,13 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useScrollSpy } from "./useScrollSpy";
 
 const links = ['Home','Services', 'About', 'Process', 'Testimonials', 'Contact']
+const sectionIds = links.map(l => l.toLowerCase())
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [solid, setSolid] = useState(false)
   const { scrollY } = useScroll()
-  const active = useScrollSpy(links.map(l => l.toLowerCase()));
+  const active = useScrollSpy(sectionIds);
 
   useEffect(() => {
     return scrollY.on('change', v => setSolid(v > 40))
@@ -23,17 +24,18 @@ export default function Navbar() {
         <motion.nav
           className="fixed top-0 left-0 right-0 z-50"
           animate={{
-            backgroundColor: solid ? 'rgba(8,12,24,0.95)' : 'rgba(8,12,24,0)',
+            backgroundColor: solid ? 'rgba(8,12,24,0.55)' : 'rgba(8,12,24,0.15)',
             borderBottomColor: solid ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0)',
-            backdropFilter: solid ? 'blur(20px)' : 'blur(0px)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
           }}
           style={{ borderBottomWidth: 1, borderBottomStyle: 'solid' }}
           transition={{ duration: 0.3 }}
         >
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 h-17.5 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 h-[70px] flex items-center justify-between">
             {/* Logo */}
-          <Link href="#" className="flex items-center gap-3 group">
-            <Image src="/logo.png" alt="Naxatech Logo" width={150} height={80} className="group-hover:animate-spin-slow transition-transform" />
+          <Link href="#home" aria-label="Naxatech home" className="flex items-center gap-3 group">
+            <Image src="/logo.png" alt="Naxatech Logo" width={150} height={80} priority className="h-auto w-[150px]" />
           </Link>
     
             {/* Desktop links           */}
@@ -47,27 +49,6 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-              {/* {links.map((l, i) => (
-                <motion.li key={l}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.07 }}>
-                  <motion.a
-                    href={`#${l.toLowerCase()}`}
-                    onClick={() => setActive(`#${l.toLowerCase()}`)}
-                    className="text-[13px] font-medium text-slate-body tracking-wide relative"
-                    whileHover={{ color: '#ffffff' }}
-                  >
-                    {l}
-                    <motion.span
-                      className="absolute -bottom-0.5 left-0 h-px bg-acid"
-                      initial={{ width: 0 }}
-                      whileHover={{ width: '100%' }}
-                      transition={{ duration: 0.2 }}
-                    />
-                  </motion.a>
-                </motion.li>
-              ))} */}
           </ul>
     
             {/* CTA */}
@@ -84,6 +65,9 @@ export default function Navbar() {
     
             {/* Mobile toggle */}
             <motion.button className="md:hidden text-white p-1"
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
               onClick={() => setOpen(!open)}
               whileTap={{ scale: 0.9 }}>
               <AnimatePresence mode="wait" initial={false}>
@@ -102,11 +86,12 @@ export default function Navbar() {
           <AnimatePresence>
             {open && (
               <motion.div
+                id="mobile-menu"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.25, ease: 'easeInOut' }}
-                className="md:hidden overflow-hidden bg-ink-2 border-t border-white/[0.07] bg-[rgba(8,12,24,0.95)] backdrop-blur-xl"
+                className="md:hidden overflow-hidden border-t border-white/[0.07] bg-[rgba(8,12,24,0.6)] backdrop-blur-xl"
               >
                 <div className="px-6 py-6 flex flex-col gap-5">
                   {links.map((l, i) => (

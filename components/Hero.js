@@ -20,10 +20,10 @@ const itemVariants = {
 }
 
 const bars = [
-  { name: 'E-Commerce Platform', val: 87, color: '#C8FF3E' },
+  { name: 'E-Commerce Platform', val: 87, color: '#fdc700' },
   { name: 'Cloud Migration',     val: 64, color: '#7AE0FF' },
   { name: 'ERP Integration',     val: 42, color: '#FF8A3E' },
-  { name: 'Cybersecurity Audit', val: 95, color: '#C8FF3E' },
+  { name: 'Cybersecurity Audit', val: 95, color: '#fdc700' },
 ]
 
 export default function Hero() {
@@ -42,7 +42,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id='home' ref={ref} className="relative min-h-screen flex flex-col justify-center overflow-hidden md:pt-17.5">
+    <section id='home' ref={ref} className="relative min-h-screen flex flex-col justify-center overflow-hidden md:pt-[70px]">
       {/* Parallax background layers */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 grid-bg opacity-100 pointer-events-none" />
       <div className="absolute inset-0 bg-linear-to-br from-ink via-ink to-ink-3" />
@@ -110,7 +110,7 @@ export default function Hero() {
               </motion.a>
               <motion.a href="#about"
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 card-border text-white font-display font-semibold text-[14px] tracking-wide rounded"
-                whileHover={{ scale: 1.03, borderColor: 'rgba(200,255,62,0.3)', backgroundColor: 'rgba(255,255,255,0.03)' }}
+                whileHover={{ scale: 1.03, borderColor: 'rgba(253,199,0,0.3)', backgroundColor: 'rgba(255,255,255,0.03)' }}
                 whileTap={{ scale: 0.97 }}>
                 <Play size={14} className="text-acid fill-acid" />
                 See Our Work

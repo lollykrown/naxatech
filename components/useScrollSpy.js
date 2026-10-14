@@ -31,7 +31,8 @@ export function useScrollSpy(sectionIds = []) {
     return () => {
       sections.forEach((section) => observer.unobserve(section));
     };
-  }, [sectionIds]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sectionIds.join(',')]);
 
   return active;
 }

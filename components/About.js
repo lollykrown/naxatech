@@ -35,10 +35,10 @@ function AnimatedCounter({ to, suffix = '', color }) {
 }
 
 const stats = [
-  { icon: TrendingUp,   to: 150, suffix: '+', label: 'Projects Delivered', color: '#C8FF3E'  },
+  { icon: TrendingUp,   to: 150, suffix: '+', label: 'Projects Delivered', color: '#fdc700'  },
   { icon: Users,        to: 80,  suffix: '+', label: 'Happy Clients',       color: '#7AE0FF' },
   { icon: Award,        to: 8,   suffix: '+', label: 'Years in Business',   color: '#FF8A3E' },
-  { icon: CheckCircle2, to: 98,  suffix: '%', label: 'Client Satisfaction', color: '#C8FF3E' },
+  { icon: CheckCircle2, to: 98,  suffix: '%', label: 'Client Satisfaction', color: '#fdc700' },
 ]
 
 const perks = [
@@ -53,9 +53,9 @@ const perks = [
 export default function About() {
   return (
     <section id="about" className="py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-ink" />
+      <div className="absolute inset-0 bg-white" />
       <div className="absolute top-0 right-0 w-100 h-full pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom left, rgba(200,255,62,0.04) 0%, transparent 60%)' }} />
+        style={{ background: 'linear-gradient(to bottom left, rgba(253,199,0,0.04) 0%, transparent 60%)' }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -68,17 +68,17 @@ export default function About() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
             <div className="flex items-center gap-3 mb-4">
               <motion.div className="h-px bg-acid" initial={{ width: 0 }} whileInView={{ width: 40 }} viewport={{ once: true }} transition={{ duration: 0.5 }} />
-              <span className="text-acid text-[11px] font-display font-bold tracking-[0.2em] uppercase">About Naxatech</span>
+              <span className="text-amber-700 text-[11px] font-display font-bold tracking-[0.2em] uppercase">About Naxatech</span>
             </div>
             <h2 className="font-display font-extrabold text-[40px] lg:text-[52px] leading-[1.05] tracking-tight mb-6">
-              <span className="text-white">Powering Nigeria's</span><br />
-              <span className="text-gradient">Digital Future</span>
+              <span className="text-slate-900">Powering Nigeria's</span><br />
+              <span className="text-gradient-light">Digital Future</span>
             </h2>
-            <p className="text-slate-body text-[15px] leading-loose mb-5">
+            <p className="text-black text-[15px] leading-loose mb-5">
               Naxatech is a Nigerian technology company on a mission to make world-class IT services
               accessible to every business — from startups to enterprises across the world.
             </p>
-            <p className="text-slate-body text-[15px] leading-loose mb-8">
+            <p className="text-black text-[15px] leading-loose mb-8">
               We combine deep technical expertise with an intimate understanding of business needs and the local
               landscape to deliver solutions that actually work — on time, on budget, and built to last.
             </p>
@@ -90,10 +90,10 @@ export default function About() {
               variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}>
               {perks.map(p => (
                 <motion.li key={p}
-                  className="flex items-center gap-3 text-[14px] text-slate-body"
+                  className="flex items-center gap-3 text-[14px] text-black"
                   variants={{ hidden: { opacity: 0, x: -16 }, visible: { opacity: 1, x: 0, transition: { duration: 0.4 } } }}>
                   <motion.div whileHover={{ scale: 1.2, color: '#fdc700' }}>
-                    <CheckCircle2 size={15} className="text-acid shrink-0" />
+                    <CheckCircle2 size={15} className="text-amber-700 shrink-0" />
                   </motion.div>
                   {p}
                 </motion.li>
@@ -117,39 +117,39 @@ export default function About() {
             <div className="grid grid-cols-2 gap-4">
               {stats.map(({ icon: Icon, to, suffix, label, color }) => (
                 <motion.div key={label}
-                  className="card-border bg-ink-3 rounded-xl p-6 text-center"
+                  className="group border border-slate-200 bg-white hover:bg-[#29a9e1] transition-colors duration-300 rounded-xl p-6 text-center group-hover:[&_*]:text-white"
                   whileHover={{ scale: 1.03, borderColor: `${color}40` }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-4"
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:!bg-white/20 group-hover:!border-white/30"
                     style={{ background: `${color}15`, border: `1px solid ${color}25` }}>
                     <Icon size={18} style={{ color }} />
                   </div>
                   <AnimatedCounter to={to} suffix={suffix} color={color} />
-                  <p className="text-slate-muted text-[12px] tracking-wide">{label}</p>
+                  <p className="text-slate-500 group-hover:text-white/90 transition-colors text-[12px] tracking-wide">{label}</p>
                 </motion.div>
               ))}
             </div>
 
             {/* Testimonial snippet */}
-            <motion.div className="card-border-acid bg-ink-3 rounded-xl p-6"
+            <motion.div className="group card-border-acid bg-white hover:bg-[#29a9e1] transition-colors duration-300 rounded-xl p-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
               whileHover={{ scale: 1.01 }}>
-              <p className="text-slate-body text-[14px] leading-relaxed italic mb-4">
+              <p className="text-black group-hover:text-white transition-colors text-[14px] leading-relaxed italic mb-4">
                 "Naxatech completely transformed our online presence. Our platform now handles
                 10x the traffic with zero downtime. They're genuine technology partners."
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-acid/20 flex items-center justify-center font-display font-bold text-acid text-[14px]">A</div>
+                <div className="w-9 h-9 rounded-full bg-acid/20 group-hover:bg-white/20 group-hover:text-white flex items-center justify-center font-display font-bold text-amber-700 text-[14px]">A</div>
                 <div>
-                  <p className="text-white text-[13px] font-semibold">Adaeze Okonkwo</p>
-                  <p className="text-slate-muted text-[11px]">CEO, Trendify NG</p>
+                  <p className="text-slate-900 group-hover:text-white transition-colors text-[13px] font-semibold">Adaeze Okonkwo</p>
+                  <p className="text-slate-500 group-hover:text-white/90 transition-colors text-[11px]">CEO, Trendify NG</p>
                 </div>
                 <div className="ml-auto flex gap-0.5">
                   {Array(5).fill(null).map((_, i) => (
-                    <motion.span key={i} className="text-acid text-[13px]"
+                    <motion.span key={i} className="text-amber-700 group-hover:text-white text-[13px]"
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}

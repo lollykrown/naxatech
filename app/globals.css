@@ -1,9 +1,11 @@
 @import "tailwindcss";
+@config "../tailwind.config.js";
 
 @layer base {
   html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   body { background: #080C18; color: #E2E6F0; }
-  ::selection { background: rgba(200,255,62,0.25); color: #fdc700; }
+  ::selection { background: rgba(253,199,0,0.25); color: #fdc700; }
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: #080C18; }
   ::-webkit-scrollbar-thumb { background: #2E3650; border-radius: 4px; }
@@ -22,14 +24,26 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  .grid-bg-light {
+    background-image:
+      linear-gradient(rgba(15,23,42,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15,23,42,0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .text-gradient-light {
+    background: linear-gradient(135deg, #b45309 0%, #0369a1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   .card-border {
     border: 1px solid rgba(255,255,255,0.07);
   }
   .card-border-acid {
-    border: 1px solid rgba(200,255,62,0.2);
+    border: 1px solid rgba(253,199,0,0.2);
   }
   .glow-acid {
-    box-shadow: 0 0 40px rgba(200,255,62,0.15);
+    box-shadow: 0 0 40px rgba(253,199,0,0.15);
   }
   .clip-diagonal {
     clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);

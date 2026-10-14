@@ -22,8 +22,8 @@ const cardV = {
 export default function Process() {
   return (
     <section id="process" className="py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-ink-2" />
-      <div className="absolute inset-0 grid-bg opacity-40" />
+      <div className="absolute inset-0 bg-slate-50" />
+      <div className="absolute inset-0 grid-bg-light opacity-40" />
       <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-acid/20 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
@@ -35,56 +35,53 @@ export default function Process() {
           transition={{ duration: 0.7 }}>
           <div className="flex items-center justify-center gap-3 mb-4">
             <motion.div className="h-px bg-acid" initial={{ width: 0 }} whileInView={{ width: 40 }} viewport={{ once: true }} transition={{ duration: 0.5 }} />
-            <span className="text-acid text-[11px] font-display font-bold tracking-[0.2em] uppercase">How We Work</span>
+            <span className="text-amber-700 group-hover:text-white transition-colors text-[11px] font-display font-bold tracking-[0.2em] uppercase">How We Work</span>
             <motion.div className="h-px bg-acid" initial={{ width: 0 }} whileInView={{ width: 40 }} viewport={{ once: true }} transition={{ duration: 0.5 }} />
           </div>
           <h2 className="font-display font-extrabold text-[44px] lg:text-[56px] leading-[1.05] tracking-tight">
-            <span className="text-white">A Process Built for</span><br />
-            <span className="text-gradient">Certainty & Speed</span>
+            <span className="text-slate-900">A Process Built for</span><br />
+            <span className="text-gradient-light">Certainty & Speed</span>
           </h2>
-          <p className="text-slate-body mt-4 text-[15px] max-w-120 mx-auto leading-relaxed">
+          <p className="text-slate-600 mt-4 text-[15px] max-w-120 mx-auto leading-relaxed">
             From your first call to go-live — here's exactly what working with Naxatech looks like.
           </p>
         </motion.div>
 
         {/* Steps */}
         <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.05] border border-white/[0.05] rounded-xl overflow-hidden"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-200 border border-slate-200 rounded-xl overflow-hidden"
           variants={containerV}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}>
           {steps.map((step) => (
             <motion.div key={step.num} variants={cardV}
-              className="group relative bg-ink-2 p-8 overflow-hidden"
-              whileHover={{ backgroundColor: '#141B2E' }}>
+              className="group relative bg-white hover:bg-[#29a9e1] transition-colors duration-300 p-8 overflow-hidden">
 
               {/* Number */}
               <motion.div
-                className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-ink-4"
-                style={{ border: '1px solid rgba(255,255,255,0.07)' }}
-                whileHover={{ borderColor: 'rgba(200,255,62,0.35)', backgroundColor: 'rgba(200,255,62,0.08)', scale: 1.1 }}
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-slate-100 group-hover:bg-white/20 transition-colors"
+                style={{ border: '1px solid rgba(15,23,42,0.1)' }}
+                whileHover={{ scale: 1.1 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
-                <motion.span className="font-display font-black text-[14px] text-slate-muted"
-                  whileHover={{ color: '#C8FF3E' }}>
+                <motion.span className="font-display font-black text-[14px] text-slate-500 group-hover:text-white transition-colors">
                   {step.num}
                 </motion.span>
               </motion.div>
 
-              <h3 className="font-display font-bold text-[18px] text-white mb-3 leading-tight">{step.title}</h3>
-              <p className="text-slate-muted text-[13px] leading-relaxed mb-5">{step.desc}</p>
+              <h3 className="font-display font-bold text-[18px] text-slate-900 group-hover:text-white transition-colors mb-3 leading-tight">{step.title}</h3>
+              <p className="text-slate-500 text-[13px] group-hover:text-white/90 transition-colors leading-relaxed mb-5">{step.desc}</p>
 
               <motion.div
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-acid/[0.08] border border-acid/15"
-                whileHover={{ borderColor: 'rgba(200,255,62,0.3)', backgroundColor: 'rgba(200,255,62,0.12)' }}>
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-acid/[0.08] border border-acid/15 group-hover:bg-white/20 group-hover:border-white/30 transition-colors">
                 <div className="w-1.5 h-1.5 rounded-full bg-acid" />
-                <span className="text-acid text-[11px] font-display font-semibold tracking-wide">{step.duration}</span>
+                <span className="text-amber-700 group-hover:text-white transition-colors text-[11px] font-display font-semibold tracking-wide">{step.duration}</span>
               </motion.div>
 
               {/* Corner glow on hover */}
               <motion.div
                 className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-acid/0 blur-2xl pointer-events-none"
-                whileHover={{ backgroundColor: 'rgba(200,255,62,0.12)' }} />
+                whileHover={{ backgroundColor: 'rgba(253,199,0,0.12)' }} />
             </motion.div>
           ))}
         </motion.div>
