@@ -2,6 +2,9 @@
 import { useEffect, useState, useRef } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 import { ArrowRight, Play, Zap } from 'lucide-react'
+import Image from 'next/image'
+
+const MotionImage = motion.create(Image)
 
 const words = ['Transform', 'Accelerate', 'Innovate', 'Elevate']
 
@@ -152,9 +155,13 @@ export default function Hero() {
 
               {/* Parallax image */}
               <div className="overflow-hidden rounded-2xl">
-                <motion.img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&auto=format&fit=crop&q=85"
-                  alt="Naxatech team collaborating on IT solutions"
+                <MotionImage
+                  src="/hero.png"
+                  alt="Four Naxatech team members in branded polo shirts smiling at a laptop in the office"
+                  width={1568}
+                  height={1003}
+                  priority
+                  sizes="(min-width: 1280px) 600px, 50vw"
                   className="w-full aspect-[4/3] object-cover"
                   style={{ scale: imgScale }}
                   initial={{ scale: 1.06 }}

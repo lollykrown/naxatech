@@ -84,10 +84,11 @@ export default function Services() {
                   ))}
                 </div>
 
-                <motion.div className="inline-flex items-center gap-1.5 text-[12px] font-display font-semibold text-slate-500 group-hover:text-white transition-colors"
+                <motion.a href="#contact"
+                  className="inline-flex items-center gap-1.5 text-[12px] font-display font-semibold text-slate-500 group-hover:text-white transition-colors"
                   whileHover={{ gap: '8px' }}>
                   Learn more <ArrowUpRight size={13} />
-                </motion.div>
+                </motion.a>
 
                 {/* Sliding bottom accent */}
                 <motion.div className="absolute bottom-0 left-0 h-0.5"
