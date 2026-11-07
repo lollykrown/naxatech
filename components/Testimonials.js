@@ -1,14 +1,11 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import Link from 'next/link'
+import { testimonials as allTestimonials } from '@/lib/content'
+import ReviewForm from './ReviewForm'
 
-const testimonials = [
-  { quote: "Naxatech built our entire logistics management platform from scratch in just 6 weeks. The quality, speed, and communication were outstanding. We've grown 3x since launch.", name: 'Emeka Nwosu',      role: 'CTO, SwiftHaul Logistics',   initials: 'EN', service: 'Custom Software', color: '#fdc700' },
-  { quote: "After struggling with security incidents for months, Naxatech overhauled our infrastructure completely. We've had zero breaches in 18 months since.", name: 'Fatima Al-Hassan', role: 'IT Director, First Unity Bank', initials: 'FA', service: 'Cybersecurity',   color: '#7AE0FF' },
-  { quote: "Our cloud migration was seamless. Naxatech handled planning, execution, staff training — and our infrastructure costs dropped by 40% in the first quarter.", name: 'Tunde Afolabi',  role: 'COO, NovaMed Healthcare',     initials: 'TA', service: 'Cloud Solutions', color: '#FF8A3E' },
-  { quote: "The team delivered a stunning e-commerce site converting at nearly double our old one. They also trained our staff on managing it. Truly full-service.", name: 'Chioma Eze',      role: 'Founder, StyleHaus Nigeria',   initials: 'CE', service: 'Web Development', color: '#fdc700' },
-]
 
 const slideVariants = {
   enter: (dir) => ({ x: dir > 0 ? 80 : -80, opacity: 0, scale: 0.96 }),
@@ -16,7 +13,10 @@ const slideVariants = {
   exit:  (dir) => ({ x: dir > 0 ? -80 : 80, opacity: 0, scale: 0.96, transition: { duration: 0.3 } }),
 }
 
-export default function Testimonials() {
+const HOME_LIMIT = 4
+const testimonials = allTestimonials.slice(0, HOME_LIMIT)
+
+export default function Testimonials({ standalone = false }) {
   const [[active, dir], setSlide] = useState([0, 0])
 
   const go = (d) => setSlide([((active + d) + testimonials.length) % testimonials.length, d])
@@ -24,60 +24,58 @@ export default function Testimonials() {
   const t = testimonials[active]
 
   return (
-    <section id="testimonials" className="py-28 relative overflow-hidden">
+    <section id="testimonials" className={`${standalone ? 'pt-16 pb-28' : 'py-28'} relative overflow-hidden`}>
       <div className="absolute inset-0 bg-white" />
-      <motion.div className="absolute inset-0 pointer-events-none"
+      <m.div className="absolute inset-0 pointer-events-none"
         animate={{ background: `radial-gradient(ellipse 50% 50% at 50% 50%, ${t.color}08 0%, transparent 70%)` }}
         transition={{ duration: 0.8 }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Header */}
-        <motion.div className="text-center mb-16"
+        {!standalone && (
+        <m.div className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}>
           <div className="flex items-center justify-center gap-3 mb-4">
-            <motion.div className="h-px bg-acid" initial={{ width: 0 }} whileInView={{ width: 40 }} viewport={{ once: true }} transition={{ duration: 0.5 }} />
-            <span className="text-amber-700 text-[11px] font-display font-bold tracking-[0.2em] uppercase">Client Stories</span>
-            <motion.div className="h-px bg-acid" initial={{ width: 0 }} whileInView={{ width: 40 }} viewport={{ once: true }} transition={{ duration: 0.5 }} />
+            <m.div className="h-px bg-acid" initial={{ width: 0 }} whileInView={{ width: 40 }} viewport={{ once: true }} transition={{ duration: 0.5 }} />
+            <span className="text-amber-700 text-[11px] font-display font-bold tracking-[0.2em] uppercase">Testimonials</span>
+            <m.div className="h-px bg-acid" initial={{ width: 0 }} whileInView={{ width: 40 }} viewport={{ once: true }} transition={{ duration: 0.5 }} />
           </div>
           <h2 className="font-display font-extrabold text-[44px] lg:text-[56px] leading-[1.05] tracking-tight">
-            <span className="text-slate-900">What Our Clients</span><br />
+            <span className="text-slate-900">What People</span><br />
             <span className="text-gradient-light">Say About Us</span>
           </h2>
-        </motion.div>
+        </m.div>
+        )}
 
         <div className="grid lg:grid-cols-3 gap-6 items-start">
           {/* Sidebar tabs */}
-          <motion.div className="hidden lg:flex flex-col gap-3"
+          <m.div className="hidden lg:flex flex-col gap-3"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}>
             {testimonials.map((item, i) => (
-              <motion.button key={i} onClick={() => setSlide([i, i > active ? 1 : -1])}
-                className={`group text-left p-4 rounded-xl border hover:bg-[#29a9e1] transition-colors duration-300 ${active === i ? 'bg-slate-100' : 'bg-white'}`}
+              <m.button key={i} onClick={() => setSlide([i, i > active ? 1 : -1])}
+                className={`group text-left p-4 rounded-xl border hover:bg-brand transition-colors duration-300 ${active === i ? 'bg-slate-100' : 'bg-white'}`}
                 style={{ borderColor: active === i ? `${item.color}35` : 'rgba(15,23,42,0.1)' }}
                 whileHover={{ x: 4, borderColor: `${item.color}25` }}
                 whileTap={{ scale: 0.98 }}>
-                <motion.p className="text-[12px] font-display font-semibold tracking-wide mb-1 group-hover:!text-white"
-                  animate={{ color: active === i ? item.color : '#5C657E' }}>
-                  {item.service}
-                </motion.p>
+                
                 <p className="text-slate-900 group-hover:text-white transition-colors text-[13px] font-medium">{item.name}</p>
-                <p className="text-slate-500 group-hover:text-white/90 transition-colors text-[11px]">{item.role}</p>
+                {item.role && <p className="text-slate-500 group-hover:text-white/90 transition-colors text-[11px]">{item.role}</p>}
                 {active === i && (
-                  <motion.div className="h-0.5 mt-3 rounded-full" style={{ background: item.color }}
-                    layoutId="activeTab"
-                    transition={{ type: 'spring', stiffness: 300, damping: 25 }} />
+                  <m.div className="h-0.5 mt-3 rounded-full" style={{ background: item.color, originX: 0 }}
+                    initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }} />
                 )}
-              </motion.button>
+              </m.button>
             ))}
-          </motion.div>
+          </m.div>
 
           {/* Main card */}
-          <motion.div className="lg:col-span-2"
+          <m.div className="lg:col-span-2"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -85,19 +83,19 @@ export default function Testimonials() {
             <div className="relative rounded-2xl overflow-hidden"
               style={{ border: `1px solid ${t.color}30` }}>
               <AnimatePresence custom={dir} mode="wait">
-                <motion.div key={active}
+                <m.div key={active}
                   custom={dir}
                   variants={slideVariants}
                   initial="enter" animate="center" exit="exit"
-                  className="group bg-white hover:bg-[#29a9e1] transition-colors duration-300 p-8 lg:p-12">
+                  className="group bg-white hover:bg-brand transition-colors duration-300 p-8 lg:p-12">
                   <Quote size={80} className="absolute top-6 right-8 opacity-[0.04]" style={{ color: t.color }} />
 
                   <div className="flex gap-0.5 mb-8">
                     {Array(5).fill(null).map((_, i) => (
-                      <motion.span key={i} className="text-[18px] group-hover:!text-white" style={{ color: t.color }}
+                      <m.span key={i} className="text-[18px] group-hover:!text-white" style={{ color: t.color }}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.06 }}>★</motion.span>
+                        transition={{ delay: i * 0.06 }}>★</m.span>
                     ))}
                   </div>
 
@@ -107,26 +105,26 @@ export default function Testimonials() {
 
                   <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-4">
-                      <motion.div
+                      <m.div
                         className="w-12 h-12 rounded-xl flex items-center justify-center font-display font-black text-[16px]"
                         style={{ background: `${t.color}20`, color: t.color, border: `1px solid ${t.color}30` }}
                         whileHover={{ scale: 1.1, rotate: 5 }}>
                         {t.initials}
-                      </motion.div>
+                      </m.div>
                       <div>
                         <p className="text-slate-900 group-hover:text-white transition-colors font-display font-semibold text-[15px]">{t.name}</p>
-                        <p className="text-slate-500 group-hover:text-white/90 transition-colors text-[12px]">{t.role}</p>
+                        {t.role && <p className="text-slate-500 group-hover:text-white/90 transition-colors text-[12px]">{t.role}</p>}
                       </div>
                     </div>
 
                     <div className="flex gap-2">
                       {[['prev', -1, ChevronLeft], ['next', 1, ChevronRight]].map(([id, d, Icon]) => (
-                        <motion.button key={id} onClick={() => go(d)}
-                          className="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500"
-                          whileHover={{ borderColor: `${t.color}50`, color: t.color, scale: 1.1 }}
+                        <m.button key={id} onClick={() => go(d)} aria-label={id === 'prev' ? 'Previous testimonial' : 'Next testimonial'}
+                          className="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 transition-colors group-hover:text-white group-hover:border-white/50 hover:!bg-white/25 hover:!text-white hover:!border-white"
+                          whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}>
                           <Icon size={18} />
-                        </motion.button>
+                        </m.button>
                       ))}
                     </div>
                   </div>
@@ -134,17 +132,26 @@ export default function Testimonials() {
                   {/* Dots */}
                   <div className="flex gap-1.5 mt-6">
                     {testimonials.map((item, i) => (
-                      <motion.button key={i} onClick={() => setSlide([i, i > active ? 1 : -1])}
+                      <m.button key={i} onClick={() => setSlide([i, i > active ? 1 : -1])}
+                        aria-label={`Show testimonial ${i + 1}: ${item.name}`}
+                        aria-current={active === i}
                         animate={{ width: active === i ? 32 : 16, backgroundColor: active === i ? item.color : '#2E3650' }}
                         transition={{ duration: 0.3 }}
                         className="h-1 rounded-full" />
                     ))}
                   </div>
-                </motion.div>
+                </m.div>
               </AnimatePresence>
             </div>
-          </motion.div>
+          </m.div>
         </div>
+
+        <div className="mt-12 text-center">
+          <Link href="/testimonials" className="inline-flex items-center gap-2 text-[14px] font-display font-semibold text-slate-700 hover:text-amber-700 underline underline-offset-4 transition-colors">
+            Read all testimonials
+          </Link>
+        </div>
+        <ReviewForm />
       </div>
     </section>
   )

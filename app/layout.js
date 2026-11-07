@@ -18,13 +18,15 @@ const body = Inter({
 });
 
 const description =
-  'Nigeria-based IT services company delivering web development, cloud solutions, cybersecurity, and digital transformation.';
+  'Nigeria-based IT services company delivering software development (web, mobile and backend), cybersecurity, IT consulting and ICT support.';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Naxatech | Technology Services for Your Business',
   description,
   alternates: { canonical: '/' },
+  manifest: '/site.webmanifest',
+  icons: { apple: '/apple-touch-icon.png' },
   openGraph: {
     type: 'website',
     url: '/',
@@ -32,13 +34,13 @@ export const metadata = {
     title: 'Naxatech | Technology Services for Your Business',
     description,
     locale: 'en_NG',
-    images: [{ url: '/logo.png', alt: 'Naxatech' }],
+    images: [{ url: '/og.jpg', width: 1200, height: 630, alt: 'The Naxatech team at work' }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Naxatech | Technology Services for Your Business',
     description,
-    images: ['/logo.png'],
+    images: ['/og.jpg'],
   },
 };
 
@@ -52,9 +54,14 @@ const jsonLd = {
   name: 'Naxatech',
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
-  email: SITE.email[0],
+  email: SITE.email,
+  telephone: [...SITE.phoneNigeria.split(',').map(n => n.trim()), SITE.phoneUk],
+  sameAs: [SITE.instagram, SITE.x],
   description,
-  address: { '@type': 'PostalAddress', streetAddress: SITE.addresses[0], addressLocality: 'Lagos', addressCountry: 'NG' },
+  address: [
+    { '@type': 'PostalAddress', streetAddress: '3 Sir Michael Otedola Crescent', addressLocality: 'Ikeja, Lagos', addressCountry: 'NG' },
+    { '@type': 'PostalAddress', streetAddress: '3 Osaka Gardens', addressLocality: 'Sunderland', addressCountry: 'GB' },
+  ],
 };
 
 export default function RootLayout({ children }) {
@@ -68,6 +75,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-acid focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

@@ -12,6 +12,7 @@ module.exports = {
         body: ['var(--font-body)', 'sans-serif'],
       },
       colors: {
+        brand: '#0e7cb5',
         ink: {
           DEFAULT: '#080C18',
           2: '#0E1322',

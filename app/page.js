@@ -1,27 +1,29 @@
-import Navbar from '@/components/Navbar'
+import dynamic from 'next/dynamic'
+import Shell from '@/components/Shell'
 import Hero from '@/components/Hero'
-import Services from '@/components/Services'
-import About from '@/components/About'
-import Process from '@/components/Process'
-import Testimonials from '@/components/Testimonials'
-import CTA from '@/components/CTA'
-import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
+import TrustedBy from '@/components/TrustedBy'
+
+// Below-the-fold sections are split into their own chunks (still server-rendered).
+const Services = dynamic(() => import('@/components/Services'))
+const About = dynamic(() => import('@/components/About'))
+const Work = dynamic(() => import('@/components/Work'))
+const Process = dynamic(() => import('@/components/Process'))
+const Testimonials = dynamic(() => import('@/components/Testimonials'))
+const CTA = dynamic(() => import('@/components/CTA'))
+const Contact = dynamic(() => import('@/components/Contact'))
 
 export default function Home() {
   return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <Process />
-        <Testimonials />
-        <CTA />
-        <Contact />
-      </main>
-      <Footer />
-    </>
+    <Shell>
+      <Hero />
+      <TrustedBy />
+      <Services />
+      <About />
+      <Work limit={3} />
+      <Process />
+      <Testimonials />
+      <CTA />
+      <Contact />
+    </Shell>
   )
 }
