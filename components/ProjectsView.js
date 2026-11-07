@@ -12,7 +12,7 @@ export default function ProjectsView({ page }) {
   return (
     <Shell>
       <PageHeader eyebrow="Our Work" title="Every project," highlight="in one place">
-        {projects.length} websites, mobile apps and platforms we've designed and built for clients in Nigeria and the UK.
+        Some of the websites, mobile apps and platforms we've designed and built for clients in Nigeria and the UK.
       </PageHeader>
       <Work standalone items={items} priorityCount={3} />
       <div className="bg-white pb-24 -mt-16 relative z-10">

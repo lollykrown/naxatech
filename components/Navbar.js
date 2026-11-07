@@ -31,8 +31,8 @@ export default function Navbar() {
         <m.nav aria-label="Main"
           className="fixed top-0 left-0 right-0 z-50"
           animate={{
-            backgroundColor: solid ? 'rgba(8,12,24,0.55)' : 'rgba(8,12,24,0.15)',
-            borderBottomColor: solid ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0)',
+            backgroundColor: solid ? 'rgba(8,12,24,0.9)' : 'rgba(8,12,24,0.15)',
+            borderBottomColor: solid ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
           }}
@@ -42,7 +42,7 @@ export default function Navbar() {
           <div className="max-w-7xl mx-auto px-6 lg:px-12 h-17.5 flex items-center justify-between">
             {/* Logo */}
           <Link href="/" aria-label="Naxatech home" className="flex items-center gap-3 group">
-            <Image src="/logo.png" alt="Naxatech Logo" width={150} height={80} priority className="h-auto w-[150px]" />
+            <Image src="/logo.png" alt="Naxatech Logo" width={254} height={63} priority className="h-auto w-[150px]" />
           </Link>
 
             {/* Desktop links           */}
@@ -50,8 +50,7 @@ export default function Navbar() {
             {links.map(l => (
               <li key={l.href}>
                 <Link href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}
-                   className={`text-[14px] font-medium text-slate-body hover:text-white 
-                   hover:text-[14px] transition-colors tracking-wide ${isActive(l.href) ? 'text-yellow-400 border-b-[1.5px] border-yellow-400' : ''}`}>
+                   className={`text-[14px] font-medium tracking-wide transition-colors ${isActive(l.href) ? 'text-yellow-400 border-b-[1.5px] border-yellow-400' : 'text-slate-200 hover:text-white'}`}>
                   {l.label}
                 </Link>
               </li>
@@ -98,13 +97,13 @@ export default function Navbar() {
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.25, ease: 'easeInOut' }}
-                className="md:hidden overflow-hidden border-t border-white/[0.07] bg-[rgba(8,12,24,0.6)] backdrop-blur-xl"
+                className="md:hidden overflow-hidden border-t border-white/[0.07] bg-[rgba(8,12,24,0.92)] backdrop-blur-xl"
               >
                 <div className="px-6 py-6 flex flex-col gap-5">
                   {links.map((l, i) => (
                     <m.a key={l.href} href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}
                       onClick={() => setOpen(false)}
-                      className={`text-[15px] text-slate-body font-medium max-w-max ${isActive(l.href) ? 'text-yellow-400 border-b-[1.5px] border-yellow-400' : ''}`}
+                      className={`text-[15px] font-medium max-w-max ${isActive(l.href) ? 'text-yellow-400 border-b-[1.5px] border-yellow-400' : 'text-slate-200'}`}
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ delay: i * 0.05 }}

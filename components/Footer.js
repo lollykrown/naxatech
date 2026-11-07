@@ -24,7 +24,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" aria-label="Naxatech home" className="inline-block mb-5">
-              <Image src="/logo.png" alt="Naxatech" width={180} height={45} className="h-auto w-[180px]" />
+              <Image src="/logo.png" alt="Naxatech" width={254} height={63} className="h-auto w-[180px]" />
             </Link>
             <p className="text-slate-muted text-[13px] leading-loose max-w-[280px] mb-6">
               NAXATECH is a fast growing world-wide information and technology company, delivering unmatched services using globally accepted standards and processes.
@@ -58,9 +58,9 @@ export default function Footer() {
         </m.div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-white/6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-slate-muted text-[12px]">
-            © {new Date().getFullYear()} Naxatech Ltd. All rights reserved. Registered in Nigeria.
+            © {new Date().getFullYear()} Naxatech Ltd. All rights reserved. Registered in Nigeria and UK.
           </p>
         </div>
       </div>
