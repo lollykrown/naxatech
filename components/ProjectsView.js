@@ -11,8 +11,8 @@ export default function ProjectsView({ page }) {
 
   return (
     <Shell>
-      <PageHeader eyebrow="Our Work" title="Every project," highlight="in one place">
-        Some of the websites, mobile apps and platforms we've designed and built for clients in Nigeria and the UK.
+      <PageHeader eyebrow="Our Work" title="Selected work," highlight="delivered for our clients">
+        A selection of the websites, mobile apps, platforms and technology solutions we've delivered for clients in Nigeria and the UK.
       </PageHeader>
       <Work standalone items={items} priorityCount={3} />
       <div className="bg-white pb-24 -mt-16 relative z-10">
