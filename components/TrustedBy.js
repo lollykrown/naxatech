@@ -22,7 +22,7 @@ export default function TrustedBy() {
 
       {/* Marquee: the list is rendered twice so the loop is seamless. Pauses on hover, static grid for reduced motion. */}
       <div className="group relative [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] motion-reduce:[mask-image:none]">
-        <ul className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:w-auto motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:px-6 motion-reduce:gap-y-6">
+        <ul className="flex w-max animate-marquee [animation-duration:40s] group-hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:w-auto motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:px-6 motion-reduce:gap-y-6">
           {clients.map(c => <Logo key={c.name} client={c} />)}
           {clients.map(c => <Logo key={`${c.name}-dup`} client={c} hidden />)}
         </ul>
