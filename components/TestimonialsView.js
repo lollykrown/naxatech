@@ -1,4 +1,6 @@
 import Shell from '@/components/Shell'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbs } from '@/lib/jsonld'
 import PageHeader from '@/components/PageHeader'
 import TestimonialCard from '@/components/TestimonialCard'
 import Pagination from '@/components/Pagination'
@@ -16,6 +18,7 @@ export default async function TestimonialsView({ page }) {
 
   return (
     <Shell>
+      <JsonLd data={breadcrumbs([['Testimonials', '/testimonials']])} />
       <PageHeader eyebrow="Testimonials" title="What People" highlight="Say About Us">
         We offer professional and premium services, but we are not limited!
       </PageHeader>

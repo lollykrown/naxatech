@@ -1,6 +1,5 @@
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import MotionProvider from '@/components/MotionProvider';
-import SITE from '@/lib/site';
 import './globals.css';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://naxatech.org';
@@ -48,22 +47,6 @@ export const viewport = {
   themeColor: '#080C18',
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Naxatech',
-  url: SITE_URL,
-  logo: `${SITE_URL}/logo.png`,
-  email: SITE.email,
-  telephone: [...SITE.phoneNigeria.split(',').map(n => n.trim()), SITE.phoneUk],
-  sameAs: [SITE.instagram, SITE.x],
-  description,
-  address: [
-    { '@type': 'PostalAddress', streetAddress: '3 Sir Michael Otedola Crescent', addressLocality: 'Ikeja, Lagos', addressCountry: 'NG' },
-    { '@type': 'PostalAddress', streetAddress: '3 Osaka Gardens', addressLocality: 'Sunderland', addressCountry: 'GB' },
-  ],
-};
-
 export default function RootLayout({ children }) {
   return (
     <html
@@ -72,10 +55,6 @@ export default function RootLayout({ children }) {
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <body className="font-body">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-acid focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
         <MotionProvider>{children}</MotionProvider>
       </body>

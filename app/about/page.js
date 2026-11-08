@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Shell from '@/components/Shell'
 import PageHeader from '@/components/PageHeader'
 import CTA from '@/components/CTA'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbs } from '@/lib/jsonld'
 import { about, values } from '@/lib/content'
 
 export const metadata = {
@@ -18,6 +20,7 @@ function Eyebrow({ children }) {
 export default function AboutPage() {
   return (
     <Shell>
+      <JsonLd data={breadcrumbs([['About Us', '/about']])} />
       <PageHeader eyebrow="About Us" title="A World-Wide" highlight="IT Company">
         {about.intro}
       </PageHeader>

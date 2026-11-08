@@ -1,4 +1,6 @@
 import Shell from '@/components/Shell'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbs } from '@/lib/jsonld'
 import PageHeader from '@/components/PageHeader'
 import Work from '@/components/Work'
 import Pagination from '@/components/Pagination'
@@ -11,6 +13,7 @@ export default function ProjectsView({ page }) {
 
   return (
     <Shell>
+      <JsonLd data={breadcrumbs([['Our Work', '/projects']])} />
       <PageHeader eyebrow="Our Work" title="Selected work," highlight="delivered for our clients">
         A selection of the websites, mobile apps, platforms and technology solutions we've delivered for clients in Nigeria and the UK.
       </PageHeader>

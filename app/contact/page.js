@@ -1,5 +1,7 @@
 import Shell from '@/components/Shell'
 import Contact from '@/components/Contact'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbs } from '@/lib/jsonld'
 
 export const metadata = {
   title: 'Contact Us | Naxatech',
@@ -11,6 +13,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <Shell>
+      <JsonLd data={breadcrumbs([['Contact Us', '/contact']])} />
         <header className="relative bg-ink pt-36 pb-16 overflow-hidden">
           <div className="absolute inset-0 grid-bg opacity-100 pointer-events-none" />
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
