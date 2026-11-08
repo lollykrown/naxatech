@@ -4,11 +4,13 @@ import TestimonialCard from '@/components/TestimonialCard'
 import Pagination from '@/components/Pagination'
 import ReviewForm from '@/components/ReviewForm'
 import CTA from '@/components/CTA'
-import { testimonials, TESTIMONIALS_PER_PAGE, testimonialPageCount } from '@/lib/content'
+import { TESTIMONIALS_PER_PAGE } from '@/lib/content'
+import { getTestimonials, pageCountFor } from '@/lib/testimonials'
 
-export default function TestimonialsView({ page }) {
+export default async function TestimonialsView({ page }) {
+  const testimonials = await getTestimonials()
   const total = testimonials.length
-  const totalPages = testimonialPageCount()
+  const totalPages = pageCountFor(total)
   const start = (page - 1) * TESTIMONIALS_PER_PAGE
   const items = testimonials.slice(start, start + TESTIMONIALS_PER_PAGE)
 

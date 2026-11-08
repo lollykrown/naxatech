@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server'
+import { renderEmail, renderText } from '@/lib/emailTemplate'
+import { addReview } from '@/lib/db'
 import { EMAIL_RE, clientIp, esc, rateLimited, readFields, sendMail } from '@/lib/mail'
 
 const LIMITS = { name: 120, email: 254, role: 160, review: 1500 }
 
-// Reviews are emailed to you for approval, never published automatically.
+// Reviews are saved as 'pending' and emailed to you; they only go live once approved in /admin/reviews.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://naxatech.org'
 export async function POST(req) {
   let body
   try {
@@ -31,16 +34,40 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Please choose a rating from 1 to 5.' }, { status: 400 })
   }
 
+  let saved = true
+  try {
+    await addReview({ name: data.name, role: data.role, email: data.email, rating, review: data.review })
+  } catch (e) {
+    saved = false
+    console.error('Review: could not save to database:', e.message)
+  }
+
+  const mail = {
+    kicker: 'New review',
+    title: `${data.name} left a ${rating}-star review`,
+    preheader: data.review.slice(0, 110),
+    stars: rating,
+    rows: [
+      ['Name', esc(data.name)],
+      ['Role / company', esc(data.role || '-')],
+      ['Email', `<a href="mailto:${esc(data.email)}" style="color:#0e7cb5;">${esc(data.email)}</a> <span style="color:#8a93ad;">(not for publishing)</span>`],
+    ],
+    message: { label: 'Review', text: data.review },
+    replyTo: data.email,
+    replySubject: 'Thank you for your review of Naxatech',
+    action: saved ? { label: 'Review & approve', href: `${SITE_URL}/admin/reviews` } : undefined,
+    note: saved
+      ? '<b>Pending approval.</b> It will not appear on the site until you approve it.'
+      : '<b>Not saved to the database</b> (it was unavailable). To publish this review, add it to <code>lib/content.js</code>.',
+  }
   const result = await sendMail({
     subject: `New review (${rating}/5) from ${data.name.replace(/[\r\n]/g, ' ')}`,
     replyTo: data.email,
-    html: `<p><b>Rating:</b> ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)} (${rating}/5)</p>
-<p><b>Name:</b> ${esc(data.name)}</p>
-<p><b>Role / company:</b> ${esc(data.role || '-')}</p>
-<p><b>Email (not for publishing):</b> ${esc(data.email)}</p>
-<p><b>Review:</b></p><p>${esc(data.review).replace(/\n/g, '<br>')}</p>
-<p><i>Pending approval. To publish it, add it to lib/content.js.</i></p>`,
+    html: renderEmail(mail),
+    text: renderText(mail),
   })
-  if (!result.ok) return NextResponse.json({ error: result.error }, { status: result.status })
+  // Succeed if the review reached you by at least one route (database or email).
+  if (!result.ok && !saved) return NextResponse.json({ error: result.error }, { status: result.status })
+  if (!result.ok) console.error('Review: saved but notification email failed')
   return NextResponse.json({ ok: true })
 }

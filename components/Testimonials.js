@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 import Link from 'next/link'
-import { testimonials as allTestimonials } from '@/lib/content'
 import ReviewForm from './ReviewForm'
 
 
@@ -14,9 +13,9 @@ const slideVariants = {
 }
 
 const HOME_LIMIT = 4
-const testimonials = allTestimonials.slice(0, HOME_LIMIT)
 
-export default function Testimonials({ standalone = false }) {
+export default function Testimonials({ items, standalone = false }) {
+  const testimonials = items.slice(0, HOME_LIMIT)
   const [[active, dir], setSlide] = useState([0, 0])
 
   const go = (d) => setSlide([((active + d) + testimonials.length) % testimonials.length, d])

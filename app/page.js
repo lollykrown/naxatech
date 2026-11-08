@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import Shell from '@/components/Shell'
 import Hero from '@/components/Hero'
 import TrustedBy from '@/components/TrustedBy'
+import { getTestimonials } from '@/lib/testimonials'
 
 // Below-the-fold sections are split into their own chunks (still server-rendered).
 const Services = dynamic(() => import('@/components/Services'))
@@ -12,7 +13,8 @@ const Testimonials = dynamic(() => import('@/components/Testimonials'))
 const CTA = dynamic(() => import('@/components/CTA'))
 const Contact = dynamic(() => import('@/components/Contact'))
 
-export default function Home() {
+export default async function Home() {
+  const testimonials = await getTestimonials()
   return (
     <Shell>
       <Hero />
@@ -21,7 +23,7 @@ export default function Home() {
       <About />
       <Work limit={3} />
       <Process />
-      <Testimonials />
+      <Testimonials items={testimonials} />
       <CTA />
       <Contact />
     </Shell>
