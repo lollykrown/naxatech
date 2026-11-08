@@ -8,7 +8,7 @@ import { rateLimited } from '@/lib/mail'
 
 export async function login(_prev, formData) {
   const ip = (await headers()).get('x-forwarded-for')?.split(',')[0].trim() || 'unknown'
-  if (rateLimited('admin-login', ip, 5, 15 * 60_000)) return { error: 'Too many attempts. Try again in a few minutes.' }
+  if (await rateLimited('admin-login', ip, 5, 15 * 60_000)) return { error: 'Too many attempts. Try again in a few minutes.' }
   if (!passwordMatches(formData.get('password'))) return { error: 'Incorrect password.' }
   await startSession()
   redirect('/admin/reviews')

@@ -15,7 +15,7 @@ export async function POST(req) {
   // Honeypot: pretend success so bots don't retry.
   if (body.website) return NextResponse.json({ ok: true })
 
-  if (rateLimited('contact', clientIp(req))) {
+  if (await rateLimited('contact', clientIp(req))) {
     return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 })
   }
 

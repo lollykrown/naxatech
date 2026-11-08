@@ -17,7 +17,7 @@ export async function POST(req) {
 
   if (body.website) return NextResponse.json({ ok: true })
 
-  if (rateLimited('review', clientIp(req), 3)) {
+  if (await rateLimited('review', clientIp(req), 3)) {
     return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 })
   }
 
