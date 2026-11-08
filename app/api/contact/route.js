@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { renderEmail, renderText } from '@/lib/emailTemplate'
 import { EMAIL_RE, clientIp, esc, rateLimited, readFields, sendMail } from '@/lib/mail'
 
 const LIMITS = { name: 120, email: 254, company: 160, service: 80, message: 5000 }
@@ -27,14 +28,25 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 })
   }
 
+  const mail = {
+    kicker: 'New enquiry',
+    title: `${data.name} sent an enquiry`,
+    preheader: data.message.slice(0, 110),
+    rows: [
+      ['Name', esc(data.name)],
+      ['Email', `<a href="mailto:${esc(data.email)}" style="color:#0e7cb5;">${esc(data.email)}</a>`],
+      ['Company', esc(data.company || '-')],
+      ['Service', esc(data.service || '-')],
+    ],
+    message: { label: 'Message', text: data.message },
+    replyTo: data.email,
+    replySubject: 'Re: your enquiry to Naxatech',
+  }
   const result = await sendMail({
     subject: `New enquiry from ${data.name.replace(/[\r\n]/g, ' ')}`,
     replyTo: data.email,
-    html: `<p><b>Name:</b> ${esc(data.name)}</p>
-<p><b>Email:</b> ${esc(data.email)}</p>
-<p><b>Company:</b> ${esc(data.company || '-')}</p>
-<p><b>Service:</b> ${esc(data.service || '-')}</p>
-<p><b>Message:</b></p><p>${esc(data.message).replace(/\n/g, '<br>')}</p>`,
+    html: renderEmail(mail),
+    text: renderText(mail),
   })
   if (!result.ok) return NextResponse.json({ error: result.error }, { status: result.status })
   return NextResponse.json({ ok: true })
