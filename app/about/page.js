@@ -7,7 +7,7 @@ import { about, values } from '@/lib/content'
 export const metadata = {
   title: 'About Us | Naxatech',
   description:
-    'NAXATECH is a fast growing world-wide information and technology company formed by highly skilled, innovative and experienced tech experts, registered in Nigeria.',
+    'NAXATECH is a fast growing world-wide information and technology company formed by highly skilled, innovative and experienced tech experts, registered in Nigeria and the United Kingdom.',
   alternates: { canonical: '/about' },
 }
 

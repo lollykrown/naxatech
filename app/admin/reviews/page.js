@@ -1,3 +1,5 @@
+import SiteShell from '@/components/Shell'
+import PageHeader from '@/components/PageHeader'
 import { adminConfigured, isAdmin } from '@/lib/adminAuth'
 import { listReviews } from '@/lib/db'
 import LoginForm from './LoginForm'
@@ -8,8 +10,13 @@ export const dynamic = 'force-dynamic'
 
 const TABS = ['pending', 'approved', 'rejected']
 
-function Shell({ children }) {
-  return <main id="main" className="min-h-screen bg-slate-50 text-slate-900 px-4 py-12"><div className="max-w-3xl mx-auto">{children}</div></main>
+function Shell({ children, title = 'Review moderation', intro }) {
+  return (
+    <SiteShell>
+      <PageHeader eyebrow="Admin" title={title.split(' ')[0]} highlight={title.split(' ').slice(1).join(' ')}>{intro}</PageHeader>
+      <section className="bg-slate-50 text-slate-900 px-6 py-14 min-h-[40vh]"><div className="max-w-3xl mx-auto">{children}</div></section>
+    </SiteShell>
+  )
 }
 
 function ActionButton({ id, action, label, className }) {
@@ -23,10 +30,10 @@ function ActionButton({ id, action, label, className }) {
 
 export default async function AdminReviews({ searchParams }) {
   if (!adminConfigured()) {
-    return <Shell><h1 className="text-2xl font-bold mb-3">Admin not configured</h1><p>Set the <code>ADMIN_PASSWORD</code> environment variable and restart.</p></Shell>
+    return <Shell title="Admin setup"><p>Set the <code>ADMIN_PASSWORD</code> environment variable and restart.</p></Shell>
   }
   if (!(await isAdmin())) {
-    return <Shell><div className="max-w-sm mx-auto bg-white border border-slate-200 rounded-2xl p-8"><h1 className="text-xl font-bold mb-6">Naxatech admin</h1><LoginForm /></div></Shell>
+    return <Shell title="Admin sign in"><div className="max-w-sm mx-auto bg-white border border-slate-200 rounded-2xl p-8"><LoginForm /></div></Shell>
   }
 
   const { status: raw } = await searchParams
@@ -40,9 +47,8 @@ export default async function AdminReviews({ searchParams }) {
   }
 
   return (
-    <Shell>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Reviews</h1>
+    <Shell intro="Approve, reject or delete reviews submitted through the website.">
+      <div className="flex justify-end mb-4">
         <form action={logout}><button className="text-[13px] text-slate-500 underline">Sign out</button></form>
       </div>
       <nav className="flex gap-2 mb-6" aria-label="Review status">
