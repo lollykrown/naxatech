@@ -38,7 +38,7 @@ function Thumbnail({ src, title, live, liveLabel, priority }) {
   )
 }
 
-function ProjectCard({ p, i, priority }) {
+function ProjectCard({ p, i, priority, Heading = 'h3' }) {
   const [open, setOpen] = useState(false)
   const paragraphs = p.longDescription.split('\n').map(s => s.trim()).filter(Boolean)
   const shown = open ? p.tech : p.tech.slice(0, PREVIEW_TAGS)
@@ -46,7 +46,8 @@ function ProjectCard({ p, i, priority }) {
 
   return (
     <m.article
-      initial={{ opacity: 0, y: 30 }}
+      // Above-the-fold cards render immediately: an opacity-0 start would delay LCP until hydration.
+      initial={priority ? false : { opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
@@ -56,9 +57,9 @@ function ProjectCard({ p, i, priority }) {
         <p className="text-[11px] font-display font-semibold tracking-widest uppercase text-amber-700 group-hover:text-white transition-colors mb-2">
           {p.year} · {p.role}
         </p>
-        <h3 className="font-display font-bold text-[18px] text-slate-900 group-hover:text-white transition-colors leading-tight mb-1">
+        <Heading className="font-display font-bold text-[18px] text-slate-900 group-hover:text-white transition-colors leading-tight mb-1">
           {p.title}
-        </h3>
+        </Heading>
         <p className="text-[12px] text-slate-500 group-hover:text-white/90 transition-colors mb-3">
           {p.client}{p.duration ? ` · ${p.duration}` : ''}
         </p>
@@ -71,7 +72,7 @@ function ProjectCard({ p, i, priority }) {
 
         <div className="flex flex-wrap gap-1.5 mb-5">
           {shown.map(t => (
-            <span key={t} className="px-2 py-0.5 text-[11px] font-display font-semibold rounded bg-slate-100 text-slate-500 border border-slate-200 group-hover:bg-white/20 group-hover:text-white group-hover:border-white/30 transition-colors">{t}</span>
+            <span key={t} className="px-2 py-0.5 text-[11px] font-display font-semibold rounded bg-slate-100 text-slate-600 border border-slate-200 group-hover:bg-white/20 group-hover:text-white group-hover:border-white/30 transition-colors">{t}</span>
           ))}
           {!open && hidden > 0 && (
             <span className="px-2 py-0.5 text-[11px] font-display font-semibold text-slate-500 group-hover:text-white transition-colors">+{hidden} more</span>
@@ -128,7 +129,7 @@ export default function Work({ limit, items, standalone = false, priorityCount =
         )}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-          {list.map((p, i) => <ProjectCard key={p.title} p={p} i={i} priority={i < priorityCount} />)}
+          {list.map((p, i) => <ProjectCard key={p.title} p={p} i={i} priority={i < priorityCount} Heading={standalone ? 'h2' : 'h3'} />)}
         </div>
 
         {hasMore && (

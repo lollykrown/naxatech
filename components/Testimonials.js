@@ -106,7 +106,7 @@ export default function Testimonials({ items, standalone = false }) {
                     <div className="flex items-center gap-4">
                       <m.div
                         className="w-12 h-12 rounded-xl flex items-center justify-center font-display font-black text-[16px]"
-                        style={{ background: `${t.color}20`, color: t.color, border: `1px solid ${t.color}30` }}
+                        style={{ background: `${t.color}20`, color: '#0f172a', border: `1px solid ${t.color}60` }}
                         whileHover={{ scale: 1.1, rotate: 5 }}>
                         {t.initials}
                       </m.div>

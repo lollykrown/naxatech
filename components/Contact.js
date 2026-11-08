@@ -95,7 +95,7 @@ export default function Contact({ standalone = false }) {
                 <div>
                   <p className="text-[10px] font-display font-bold tracking-widest uppercase text-amber-700 mb-1">{label}</p>
                   {lines.map(({ text, href }) => href
-                    ? <a key={text} href={href} className="block text-slate-900 text-[14px] font-medium hover:text-amber-700">{text}</a>
+                    ? <a key={text} href={href} className="block py-1 text-slate-900 text-[14px] font-medium hover:text-amber-700">{text}</a>
                     : <p key={text} className="text-slate-900 text-[14px] font-medium">{text}</p>)}
                 </div>
               </m.div>

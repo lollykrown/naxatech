@@ -21,7 +21,7 @@ export default function TestimonialCard({ t }) {
 
       <figcaption className="flex items-center gap-3">
         <div className="w-11 h-11 rounded-xl flex items-center justify-center font-display font-black text-[14px] shrink-0"
-          style={{ background: `${t.color}20`, color: t.color, border: `1px solid ${t.color}30` }} aria-hidden="true">
+          style={{ background: `${t.color}20`, color: '#0f172a', border: `1px solid ${t.color}60` }} aria-hidden="true">
           {t.initials}
         </div>
         <div>
