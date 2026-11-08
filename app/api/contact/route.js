@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server'
+import { services } from '@/lib/content'
 import { renderEmail, renderText } from '@/lib/emailTemplate'
 import { EMAIL_RE, clientIp, esc, rateLimited, readFields, sendMail } from '@/lib/mail'
 
+const SERVICES = [...services.map(s => s.title), 'Other']
 const LIMITS = { name: 120, email: 254, company: 160, service: 80, message: 5000 }
 
 export async function POST(req) {
@@ -9,6 +11,10 @@ export async function POST(req) {
   try {
     body = await req.json()
   } catch {
+    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
+  }
+
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
   }
 
@@ -23,6 +29,12 @@ export async function POST(req) {
   if (error) return NextResponse.json({ error }, { status: 400 })
   if (!data.name || !data.message) {
     return NextResponse.json({ error: 'Name and message are required.' }, { status: 400 })
+  }
+  if (data.message.length < 10) {
+    return NextResponse.json({ error: 'Please tell us a little more (at least 10 characters).' }, { status: 400 })
+  }
+  if (data.service && !SERVICES.includes(data.service)) {
+    return NextResponse.json({ error: 'Please choose a service from the list.' }, { status: 400 })
   }
   if (!EMAIL_RE.test(data.email)) {
     return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 })

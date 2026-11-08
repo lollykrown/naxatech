@@ -15,6 +15,10 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
   }
 
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
+  }
+
   if (body.website) return NextResponse.json({ ok: true })
 
   if (await rateLimited('review', clientIp(req), 3)) {
