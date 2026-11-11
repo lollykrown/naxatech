@@ -4,7 +4,7 @@ import Hero from '@/components/Hero'
 import TrustedBy from '@/components/TrustedBy'
 import JsonLd from '@/components/JsonLd'
 import { organization, website } from '@/lib/jsonld'
-import { getTestimonials } from '@/lib/testimonials'
+import { getHomeTestimonials } from '@/lib/testimonials'
 
 // Below-the-fold sections are split into their own chunks (still server-rendered).
 const Services = dynamic(() => import('@/components/Services'))
@@ -16,7 +16,7 @@ const CTA = dynamic(() => import('@/components/CTA'))
 const Contact = dynamic(() => import('@/components/Contact'))
 
 export default async function Home() {
-  const testimonials = await getTestimonials()
+  const testimonials = await getHomeTestimonials()
   return (
     <Shell>
       <JsonLd data={[organization, website]} />

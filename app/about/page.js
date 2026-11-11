@@ -50,7 +50,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-slate-100">
         <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
           <Eyebrow>Our Mission</Eyebrow>
           <p className="font-display font-bold text-[22px] lg:text-[28px] leading-snug text-slate-900">{about.mission}</p>
@@ -76,7 +76,7 @@ export default function AboutPage() {
       </section>
 
       {/* Community */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-slate-100">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-display font-extrabold text-[28px] lg:text-[36px] leading-tight text-slate-900 mb-4">
             Are you starting your career in tech, or want to transition into it?

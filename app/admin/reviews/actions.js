@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { endSession, isAdmin, passwordMatches, startSession } from '@/lib/adminAuth'
-import { deleteReview, setReviewStatus } from '@/lib/db'
+import { deleteReview, setFeatured, setReviewStatus } from '@/lib/db'
 import { rateLimited } from '@/lib/mail'
 
 export async function login(_prev, formData) {
@@ -28,7 +28,8 @@ export async function moderate(formData) {
   const id = Number(formData.get('id'))
   const action = formData.get('action')
   if (!Number.isInteger(id)) return
-  if (action === 'delete') await deleteReview(id)
+  if (action === 'feature' || action === 'unfeature') await setFeatured(id, action === 'feature')
+  else if (action === 'delete') await deleteReview(id)
   else if (['approved', 'rejected', 'pending'].includes(action)) await setReviewStatus(id, action)
   refreshSite()
   revalidatePath('/admin/reviews')
