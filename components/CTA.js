@@ -6,7 +6,7 @@ import SITE from '@/lib/site'
 export default function CTA() {
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-slate-50" />
+      <div className="absolute inset-0 bg-slate-100" />
       <div className="absolute inset-0 grid-bg-light opacity-60" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-acid/30 to-transparent" />
       <div className="absolute inset-x-0 top-[-50%] h-[200%] pointer-events-none"

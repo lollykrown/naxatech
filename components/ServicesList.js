@@ -7,7 +7,7 @@ import { serviceIcons } from './Services'
 export default function ServicesList() {
   return (
     <section className="pt-16 pb-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-slate-50" />
+      <div className="absolute inset-0 bg-slate-100" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
         {services.map((svc, i) => {
           const Icon = serviceIcons[svc.key]

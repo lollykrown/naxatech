@@ -170,3 +170,6 @@ export default function Hero() {
     </section>
   )
 }
+
+// A 76.76.21.21
+// CNAME Record	www cname.vercel-dns.com.

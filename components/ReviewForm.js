@@ -54,7 +54,7 @@ export default function ReviewForm() {
             initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="overflow-hidden">
-            <div className="max-w-2xl mx-auto mt-8 text-left border border-slate-200 bg-slate-50 rounded-2xl p-6 sm:p-8">
+            <div className="max-w-2xl mx-auto mt-8 text-left border border-slate-200 bg-slate-100 rounded-2xl p-6 sm:p-8">
               {sent ? (
                 <div role="status" className="text-center py-6">
                   <CheckCircle2 size={36} className="text-amber-700 mx-auto mb-4" aria-hidden="true" />

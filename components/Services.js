@@ -26,7 +26,7 @@ export default function Services() {
   const list = services.filter(s => s.home)
   return (
     <section id="services" className="py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-slate-50" />
+      <div className="absolute inset-0 bg-slate-100" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         <SectionTitle eyebrow="Our Services" title="Get Technology Services" highlight="From The Best Provider">
           We offer professional and premium services listed below, but we are not limited!

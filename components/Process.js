@@ -22,7 +22,7 @@ const cardV = {
 export default function Process({ standalone = false }) {
   return (
     <section id="process" className={`${standalone ? 'pt-16 pb-28' : 'py-28'} relative overflow-hidden`}>
-      <div className="absolute inset-0 bg-slate-50" />
+      <div className="absolute inset-0 bg-slate-100" />
       <div className="absolute inset-0 grid-bg-light opacity-40" />
       <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-acid/20 to-transparent" />
 
