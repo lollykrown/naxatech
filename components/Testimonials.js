@@ -89,16 +89,16 @@ export default function Testimonials({ items, standalone = false }) {
                   className="group bg-white hover:bg-brand transition-colors duration-300 p-8 lg:p-12">
                   <Quote size={80} className="absolute top-6 right-8 opacity-[0.04]" style={{ color: t.color }} />
 
-                  <div className="flex gap-0.5 mb-8">
+                  <div className="flex gap-0.5 mb-8" role="img" aria-label={`Rated ${t.rating || 5} out of 5`}>
                     {Array(5).fill(null).map((_, i) => (
-                      <m.span key={i} className="text-[18px] group-hover:!text-white" style={{ color: t.color }}
+                      <m.span key={i} className="text-[18px]" style={{ color: i < (t.rating || 5) ? '#F5B301' : '#CBD5E1' }}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.06 }}>★</m.span>
                     ))}
                   </div>
 
-                  <blockquote className="text-slate-900 group-hover:text-white transition-colors text-[18px] lg:text-[22px] leading-relaxed font-light mb-10">
+                  <blockquote className="text-slate-900 group-hover:text-white transition-colors text-[16px] lg:text-[19px] leading-relaxed font-light mb-10">
                     "{t.quote}"
                   </blockquote>
 
