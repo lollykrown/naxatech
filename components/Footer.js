@@ -5,6 +5,7 @@ import Link from 'next/link'
 import SITE from '@/lib/site'
 
 const cols = [
+  { title: 'Explore', links: [['Download Profile','/docs/Naxatech_Limited_Company_Profile.pdf']] },
   { title: 'Services', links: [['Software Development','/services'],['Cyber Security','/services'],['ICT Support','/services'],['Penetration Testing & Audits','/services'],['IT Consulting','/services'],['Product Services','/services']] },
   { title: 'Company',  links: [['About Us','/about'],['Our Process','/#process'],['Projects','/projects'],['Testimonials','/testimonials'],['Contact','/contact']] },
 ]
@@ -16,7 +17,7 @@ export default function Footer() {
     <footer className="relative bg-ink border-t border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-16 pb-8">
         <m.div
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14"
+          className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
